@@ -208,35 +208,40 @@ class OpenChannelPageState extends State<OpenChannelPage> {
     );
   }
 
+  sendMsg() {
+    if (textEditingController.value.text.isEmpty) {
+      return;
+    }
+
+    openChannel?.sendUserMessage(
+      UserMessageCreateParams(
+        message: textEditingController.value.text,
+      ),
+      handler: (UserMessage message, SendbirdException? e) async {
+        if (e != null) {
+          await _showDialogToResendUserMessage(message);
+        } else {
+          _addMessage(message);
+        }
+      },
+    );
+
+    textEditingController.clear();
+  }
+
   Widget _messageSender() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(
-            child: Widgets.textField(textEditingController, 'Message'),
+            child: Widgets.textField(textEditingController, 'Message',
+                onSubmitted: sendMsg),
           ),
           const SizedBox(width: 8.0),
           ElevatedButton(
             onPressed: () async {
-              if (textEditingController.value.text.isEmpty) {
-                return;
-              }
-
-              openChannel?.sendUserMessage(
-                UserMessageCreateParams(
-                  message: textEditingController.value.text,
-                ),
-                handler: (UserMessage message, SendbirdException? e) async {
-                  if (e != null) {
-                    await _showDialogToResendUserMessage(message);
-                  } else {
-                    _addMessage(message);
-                  }
-                },
-              );
-
-              textEditingController.clear();
+              sendMsg();
             },
             child: const Text('Send'),
           ),

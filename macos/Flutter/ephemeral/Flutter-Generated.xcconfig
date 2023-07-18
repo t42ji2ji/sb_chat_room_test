@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/tyler.jeong/dev/flutter
-FLUTTER_APPLICATION_PATH=/Users/tyler.jeong/git/sendbird-chat-sample-flutter
+FLUTTER_ROOT=/Users/dora/fvm/versions/3.10.5
+FLUTTER_APPLICATION_PATH=/Users/dora/testwork/sendbird-chat-sample-flutter
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=4.0.4

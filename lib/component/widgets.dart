@@ -37,16 +37,19 @@ class Widgets {
   static Widget textField(
     TextEditingController controller,
     String labelText, {
+    Function()? onSubmitted,
     int? maxLines,
   }) {
     return TextField(
       controller: controller,
+      autofocus: true,
       decoration: InputDecoration(
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
         labelText: labelText,
       ),
+      onSubmitted: (_) => onSubmitted?.call(),
       maxLines: maxLines ?? 1,
     );
   }
